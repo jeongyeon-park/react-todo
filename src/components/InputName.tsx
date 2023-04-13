@@ -1,7 +1,12 @@
 import {Input, Button, Form} from 'antd';
 import {useNavigate} from 'react-router-dom';
+import styled from 'styled-components';
 
-function InputName(){
+const InputWrap = styled.div`
+    width: 300px;
+`
+
+const InputName = ()=>{
     const navigate = useNavigate();
 
     const [form] = Form.useForm();
@@ -9,15 +14,15 @@ function InputName(){
     const onFinish= (values:any)=>{
         console.log(values);
         localStorage.setItem('name',values.username);
-        navigate('/whether');
+        navigate('/weather');
     }
 
     return (
-        <div>
+        <InputWrap>
             <Form 
                 onFinish={onFinish}>
                 <Form.Item
-                    label="username"
+                    label="이름"
                     name="username"
                     rules={[{required: true, message:"이름을 입력 해주세요."},
                             {min:1, message:"1글자 이상 이름을 입력 해주세요."}]}
@@ -30,7 +35,7 @@ function InputName(){
                     </Button>
                 </Form.Item>
             </Form>
-        </div>
+        </InputWrap>
     );
 }
 
