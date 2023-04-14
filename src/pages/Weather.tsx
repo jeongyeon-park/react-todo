@@ -1,18 +1,14 @@
 import {useEffect, useState} from 'react';
 import {useNavigate} from 'react-router-dom';
 import axios from 'axios';
-import {Button} from 'antd';
-import {RightCircleOutlined} from '@ant-design/icons';
-import {useQuery} from 'react-query';
+// import {Button} from 'antd';
+// import {RightCircleOutlined} from '@ant-design/icons';
+// import {useQuery} from 'react-query';
 import * as S from "../components/style";
+import tw from "tailwind-styled-components";
 
 const Weather = ()=>{
     const navigate = useNavigate();
-
-    interface IWeatherProps {
-        lat:number;
-        lon:number;
-    }
 
     interface IWeatherDataProps {
         base: string;
@@ -29,26 +25,39 @@ const Weather = ()=>{
         weather: [{id: number, main: string, description: string, icon: string}];
         length: number;
     }
-    const [location, setLocation] = useState<IWeatherProps>({lat:0,lon:0});
-    const [weatherData, setWeatherData] = useState<IWeatherDataProps>();
+    const [weatherData, setWeatherData] = useState<IWeatherDataProps>({
+        base: "",
+        clouds: {all: 0},
+        cod: 0,
+        coord: {lon: 0, lat: 0},
+        dt: 0,
+        id: 0,
+        main: {temp_max:0, temp_min: 0},
+        name: " ",
+        sys:{},
+        timezone: 0,
+        visiblity: 0,
+        weather: [{id: 0, main: " ", description: " ", icon: "01d"}],
+        length: 0,
+    });
 
-    const imageUrl = "../util/icons/" +  weatherData?.weather[0].icon + ".png"
+    const [imageUrl, setImageUrl] = useState("01d"); 
 // C:\Users\USER\Desktop\todo-list\src\util\icons\01n.png
     const getCurrentLocation = () => {
         // 현재 위치 가져오기
         navigator.geolocation.getCurrentPosition((position) => {
           let lat = position.coords.latitude;
           let lon = position.coords.longitude;
-          setLocation({lat:lat, lon:lon})
+
+          getCurrentWeather(lat, lon);
         });
-        
-        console.log(location);
     };
 
     const getCurrentWeather = async(lat:number, lon: number)=>{
             const api = `https://api.openweathermap.org/data/2.5/weather?lat=${lat}&lon=${lon}&appid=${process.env.REACT_APP_WEATHER_API_KEY}`;
             const {data} = await axios.get(api);
             setWeatherData(data);
+            setImageUrl(data.weather[0].icon)
     }
 
     useEffect(()=>{
@@ -65,23 +74,20 @@ const Weather = ()=>{
     //         }
     //     })
 
-    useEffect(()=>{
-        getCurrentWeather(location.lat, location.lon)
-    },[location])
 
     return (
         <S.Container>
             <S.ComponentWrap>
-            <img src={require(imageUrl).default} alt="weather_image"/>
-            <div>{weatherData?.name}의 날씨</div>
-            <div>최고 온도{weatherData?.main.temp_max ?? 1 * 1.8 + 32}</div>
-            <div>최저 온도{weatherData?.main.temp_min ?? 1 * 1.8 + 32}</div>
-            <Button
+            <img src={`/images/${imageUrl}.png`} alt="weather_image"/>
+            <div>{weatherData.name}의 날씨</div>
+            <div>최고 온도{weatherData.main.temp_max }</div>
+            <div>최저 온도{weatherData.main.temp_min }</div>
+            <button
                 style={{marginTop: "20px"}} 
                 onClick={()=>navigate('/todoList')}
             >
                 Todo List
-            </Button>
+            </button>
             </S.ComponentWrap>    
         </S.Container>
     );

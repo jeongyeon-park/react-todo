@@ -1,4 +1,5 @@
 import styled from 'styled-components';
+import tw from 'tailwind-styled-components';
 
 export const Container = styled.div`
     width: 100vw;
@@ -17,3 +18,9 @@ export const ComponentWrap = styled.div`
     border-radius: 5px;
     padding: 20px;
 `;
+
+// export const ComponentWrap = tw.div`
+//     flex,
+//     flex-col,
+
+// `
