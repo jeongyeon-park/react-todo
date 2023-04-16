@@ -1,11 +1,10 @@
 import {useEffect, useState} from 'react';
 import {useNavigate} from 'react-router-dom';
 import axios from 'axios';
-// import {Button} from 'antd';
+import {Button} from 'antd';
 // import {RightCircleOutlined} from '@ant-design/icons';
 // import {useQuery} from 'react-query';
 import * as S from "../components/style";
-import tw from "tailwind-styled-components";
 
 const Weather = ()=>{
     const navigate = useNavigate();
@@ -64,30 +63,21 @@ const Weather = ()=>{
         getCurrentLocation()
     },[]);
 
-    // const {data} = useQuery(
-    //     ['weather', location],
-    //     ()=>getCurrentWeather(location.lat, location.lon),
-    //     {
-    //         onSuccess:()=>{
-    //             console.log("useQuery결과: ", data);
-    //             setWeatherData(data?.data);
-    //         }
-    //     })
-
-
     return (
         <S.Container>
             <S.ComponentWrap>
             <img src={`/images/${imageUrl}.png`} alt="weather_image"/>
             <div>{weatherData.name}의 날씨</div>
-            <div>최고 온도{weatherData.main.temp_max }</div>
-            <div>최저 온도{weatherData.main.temp_min }</div>
-            <button
+            <div>{weatherData.weather[0].main}</div>
+            <div>{weatherData.weather[0].description}</div>
+            <div>최고 온도 {(weatherData.main.temp_max -  273.15).toFixed(2)}</div>
+            <div>최저 온도 {(weatherData.main.temp_min -  273.15).toFixed(2)}</div>
+            <Button
                 style={{marginTop: "20px"}} 
                 onClick={()=>navigate('/todoList')}
             >
                 Todo List
-            </button>
+            </Button>
             </S.ComponentWrap>    
         </S.Container>
     );

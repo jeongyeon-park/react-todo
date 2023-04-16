@@ -11,7 +11,7 @@ const Container = styled.div`
     align-items: center;
 `;
 const HomeComponent = styled.div`
-    width: 400px;
+    width: 00px;
     height: 500px;
     display: flex;
     flex-direction: column;
