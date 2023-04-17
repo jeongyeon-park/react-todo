@@ -64,7 +64,8 @@ const Weather = ()=>{
     }
 
     useEffect(()=>{
-        getCurrentLocation()
+        getCurrentLocation();
+        if(!userName) navigate("/");
     },[]);
 
     return (
