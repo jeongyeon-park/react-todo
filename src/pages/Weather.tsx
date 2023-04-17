@@ -2,8 +2,6 @@ import {useEffect, useState} from 'react';
 import {useNavigate} from 'react-router-dom';
 import axios from 'axios';
 import {Button} from 'antd';
-// import {RightCircleOutlined} from '@ant-design/icons';
-// import {useQuery} from 'react-query';
 import * as S from "../components/style";
 import { useRecoilValue } from 'recoil';
 import { userNameState } from '../atom';
@@ -73,7 +71,7 @@ const Weather = ()=>{
             <S.ComponentWrap>
             <div>{userName}님 안녕하세요.</div>
 
-            <img src={`/images/${imageUrl}.png`} alt="weather_image"/>
+            <img src={`${process.env.PUBLIC_URL}/images/${imageUrl}.png`} alt="weather_image"/>
             <div>{weatherData.name}의 날씨</div>
             <div>{weatherData.weather[0].main}</div>
             <div>{weatherData.weather[0].description}</div>
