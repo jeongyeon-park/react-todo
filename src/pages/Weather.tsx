@@ -71,7 +71,7 @@ const Weather = ()=>{
             <S.ComponentWrap>
             <div>{userName}님 안녕하세요.</div>
 
-            <img src={`${process.env.PUBLIC_URL}/images/${imageUrl}.png`} alt="weather_image"/>
+            <img src={`${process.env.PUBLIC_URL}/react-todo/images/${imageUrl}.png`} alt="weather_image"/>
             <div>{weatherData.name}의 날씨</div>
             <div>{weatherData.weather[0].main}</div>
             <div>{weatherData.weather[0].description}</div>

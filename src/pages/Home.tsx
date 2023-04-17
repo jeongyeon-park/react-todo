@@ -17,7 +17,7 @@ const Home =()=>{
         if(userName){
             navigate("/weather");
         }
-    })
+    },[])
    
     return (
         <S.Container>
