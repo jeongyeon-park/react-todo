@@ -9,7 +9,7 @@ function App() {
   return (
     <RecoilRoot>
       <div className="App">
-        <BrowserRouter>
+        <BrowserRouter basename={process.env.PUBLIC_URL}>
           <Routes>
             <Route path="/" element={<Home />}></Route>
             <Route path="/weather" element={<Weather />}></Route>

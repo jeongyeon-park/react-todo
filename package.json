@@ -1,5 +1,5 @@
 {
-  "homepage":"https://jeongyeon-park.github.io/react-todo",
+  "homepage": "https://jeongyeon-park.github.io/react-todo",
   "name": "todo-list",
   "version": "0.1.0",
   "private": true,
@@ -17,6 +17,7 @@
     "@types/styled-components": "^5.1.26",
     "antd": "^5.4.2",
     "axios": "^1.3.5",
+    "gh-pages": "^5.0.0",
     "react": "^18.2.0",
     "react-dom": "^18.2.0",
     "react-hook-form": "^7.43.9",
