@@ -5,6 +5,8 @@ import {Button} from 'antd';
 // import {RightCircleOutlined} from '@ant-design/icons';
 // import {useQuery} from 'react-query';
 import * as S from "../components/style";
+import { useRecoilValue } from 'recoil';
+import { userNameState } from '../atom';
 
 const Weather = ()=>{
     const navigate = useNavigate();
@@ -41,7 +43,9 @@ const Weather = ()=>{
     });
 
     const [imageUrl, setImageUrl] = useState("01d"); 
-// C:\Users\USER\Desktop\todo-list\src\util\icons\01n.png
+
+    const userName = useRecoilValue(userNameState);
+
     const getCurrentLocation = () => {
         // 현재 위치 가져오기
         navigator.geolocation.getCurrentPosition((position) => {
@@ -66,6 +70,8 @@ const Weather = ()=>{
     return (
         <S.Container>
             <S.ComponentWrap>
+            <div>{userName}님 안녕하세요.</div>
+
             <img src={`/images/${imageUrl}.png`} alt="weather_image"/>
             <div>{weatherData.name}의 날씨</div>
             <div>{weatherData.weather[0].main}</div>

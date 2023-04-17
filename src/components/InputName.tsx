@@ -1,6 +1,8 @@
 import { Input, Button, Form } from "antd";
 import { useNavigate } from "react-router-dom";
+import { useSetRecoilState } from "recoil";
 import styled from "styled-components";
+import { userNameState } from "../atom";
 
 const InputWrap = styled.div`
   width: 100%;
@@ -14,10 +16,12 @@ const Infomation = styled.div`
 `
 
 const InputName = () => {
+  const setUserName = useSetRecoilState(userNameState);
   const navigate = useNavigate();
 
   const onFinish = (values: any) => {
     console.log(values);
+    setUserName(values.username)
     localStorage.setItem("name", values.username);
     navigate("/weather");
   };

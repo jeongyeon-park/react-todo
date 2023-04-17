@@ -8,6 +8,7 @@ const Item = styled.div`
     display: flex;
     justify-content: center;
     align-items: center;
+    margin-bottom: 10px;
 `;
 
 const TodoItem = ({id, name , status} : {
@@ -18,7 +19,7 @@ const TodoItem = ({id, name , status} : {
 
     const ToDoButtonStyle = {backgroundColor:"#fee894", color:"#5f4ca5", fontWeight: 'bold'};
     const PendingButtonStyle = {backgroundColor:"#80eaff", color:"#5f4ca5", fontWeight: 'bold'};
-    const DoneButtonStyle = {backgroundColor:"#5f4ca5", color:"white", fontWeight: 'bold'}
+    const DoneButtonStyle = {backgroundColor:"#5f4ca5", color:"white", fontWeight: 'bold' };
 
     const [todoList, setTodoList] = useRecoilState(todoListState);
     const handleOnToDoClick = () =>{
@@ -33,7 +34,7 @@ const TodoItem = ({id, name , status} : {
     
     return (
         <Item>
-            <div style={{width:"50%"}}>{name}</div>
+            <div style={{width:"50%", overflow: "hidden", textOverflow: "ellipsis", whiteSpace: "nowrap"}}>{name}</div>
             {status === "TO_DO" ? 
                 <>
                     <Button style={PendingButtonStyle} onClick={handleOnPendingClick}>Pending</Button>

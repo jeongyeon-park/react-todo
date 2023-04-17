@@ -1,28 +1,24 @@
+import {useEffect} from "react";
 import InputName from "../components/InputName";
-import styled from "styled-components";
 import { UserOutlined } from "@ant-design/icons";
 import * as S from "../components/style";
+import { useRecoilValue } from "recoil";
+import { userNameState } from "../atom";
+import { useNavigate } from "react-router-dom";
 
-const Container = styled.div`
-    width: 100vw;
-    height: 100vh;
-    display: flex;
-    justify-content: center;
-    align-items: center;
-`;
-const HomeComponent = styled.div`
-    width: 00px;
-    height: 500px;
-    display: flex;
-    flex-direction: column;
-    justify-content: center;
-    align-items: center;
-    border-radius: 5px;
-    border: 1px solid lightgrey;
-    padding: 20px;
-`;
 
 const Home =()=>{
+
+    const userName = useRecoilValue(userNameState);
+    const navigate = useNavigate();
+
+    // 유저 이름 localStorage 에 있으면 다음 페이지 
+    useEffect(()=>{
+        if(userName){
+            navigate("/weather");
+        }
+    })
+   
     return (
         <S.Container>
             <S.ComponentWrap>
