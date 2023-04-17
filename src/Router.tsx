@@ -6,7 +6,8 @@ import TodoList from "./pages/TodoList";
 export const Router = ()=>{
 
     return (
-        <BrowserRouter basename={process.env.PUBLIC_URL}>
+        <BrowserRouter >
+        {/* 배포시 BrowerRouter 에 추가해줘야함 => basename={process.env.PUBLIC_URL} */}
           <Routes>
             <Route path="/" element={<Home />}/>
             <Route path="/weather" element={<Weather />}/>

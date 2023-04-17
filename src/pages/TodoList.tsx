@@ -23,6 +23,12 @@ const Title = styled.div`
   color: #5f4ca5;
 `;
 
+enum todoStatus {
+  todo = "TO_DO",
+  done = "DONE",
+  pending = "PENDING",
+}
+
 const TodoList = () => {
   const userName = useRecoilValue(userNameState);
 
@@ -31,8 +37,9 @@ const TodoList = () => {
     name: string;
     status: "TO_DO" | "DONE" | "PENDING";
   }
-  const [todoList, setTodoList] = useRecoilState<ITodoItem[]>(todoListState);
 
+  const todoStatus = ["TO_DO", "DONE", "PENDING"];
+  const [todoList, setTodoList] = useRecoilState<ITodoItem[]>(todoListState);
 
   const keyNumber = useRef(0);
 
@@ -48,7 +55,6 @@ const TodoList = () => {
     keyNumber.current += 1;
 
     console.log(todoList);
-    
   };
 
   return (
@@ -70,36 +76,20 @@ const TodoList = () => {
 
         <ListWrap>
           <Row gutter={16}>
-            <Col className="gutter-row" span={8}>
-              <Title>Todo</Title>
-              <ListItemWrap>
-                {todoList
-                  .filter((item) => item.status === "TO_DO")
-                  .map((item) => (
-                    <TodoItem key={item.id} {...item}></TodoItem>
-                  ))}
-              </ListItemWrap>
-            </Col>
-            <Col className="gutter-row" span={8}>
-              <Title>Pending</Title>
-              <ListItemWrap>
-                {todoList
-                  .filter((item) => item.status === "PENDING")
-                  .map((item) => (
-                    <TodoItem key={item.id} {...item}></TodoItem>
-                  ))}
-              </ListItemWrap>
-            </Col>
-            <Col className="gutter-row" span={8}>
-              <Title>Done</Title>
-              <ListItemWrap>
-                {todoList
-                  .filter((item) => item.status === "DONE")
-                  .map((item) => (
-                    <TodoItem key={item.id} {...item}></TodoItem>
-                  ))}
-              </ListItemWrap>
-            </Col>
+            {todoStatus.map((todoStatusValue) => {
+              return (
+                <Col className="gutter-row" xs={24} sm={24} md={8}>
+                  <Title>{todoStatusValue}</Title>
+                  <ListItemWrap>
+                    {todoList
+                      .filter((item) => item.status === todoStatusValue)
+                      .map((item) => (
+                        <TodoItem key={item.id} {...item}></TodoItem>
+                      ))}
+                  </ListItemWrap>
+                </Col>
+              );
+            })}
           </Row>
         </ListWrap>
       </S.ComponentWrap>
