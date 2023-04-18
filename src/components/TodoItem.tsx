@@ -2,6 +2,7 @@ import {Button} from 'antd';
 import styled from "styled-components";
 import {useRecoilState} from 'recoil';
 import { todoListState } from '../atom';
+import { ToDoButtonStyle, PendingButtonStyle, DoneButtonStyle} from '../components/style';
 
 const Item = styled.div`
     width: 100%;
@@ -17,10 +18,6 @@ const TodoItem = ({id, name , status} : {
     status: string
 })=>{
 
-    const ToDoButtonStyle = {backgroundColor:"#fee894", color:"#5f4ca5", fontWeight: 'bold'};
-    const PendingButtonStyle = {backgroundColor:"#80eaff", color:"#5f4ca5", fontWeight: 'bold'};
-    const DoneButtonStyle = {backgroundColor:"#5f4ca5", color:"white", fontWeight: 'bold' };
-
     const [todoList, setTodoList] = useRecoilState(todoListState);
     const handleOnToDoClick = () =>{
         setTodoList(todoList.map((item)=> item.id === id ? {...item, status:"TO_DO"} : item ))
@@ -34,7 +31,7 @@ const TodoItem = ({id, name , status} : {
     
     return (
         <Item>
-            <div style={{width:"50%", overflow: "hidden", textOverflow: "ellipsis", whiteSpace: "nowrap"}}>{name}</div>
+            <div style={{width:"40%", overflow: "hidden", textOverflow: "ellipsis", whiteSpace: "nowrap"}}>{name}</div>
             {status === "TO_DO" ? 
                 <>
                     <Button style={PendingButtonStyle} onClick={handleOnPendingClick}>Pending</Button>
